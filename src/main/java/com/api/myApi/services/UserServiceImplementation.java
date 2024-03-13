@@ -8,6 +8,7 @@ import com.api.myApi.helpers.MailHelper;
 import com.api.myApi.models.User;
 import com.api.myApi.repositories.UserRepository;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,9 +57,14 @@ public class UserServiceImplementation implements UserServiceInterface {
 
     @Override
     @Transactional()
-    public User edit(Long id, User user) {
-        user.setIdUser(id);
-        return repository.save(user);
+    public User edit(Long id, Map<String, String> user) {
+        User userEdited = repository.findById(id).orElse(null);
+        userEdited.setName(user.get("name"));
+        userEdited.setLastname(user.get("lastname"));
+        userEdited.setMail(user.get("mail"));
+        userEdited.setStatus(user.get("status"));
+        
+        return repository.save(userEdited);
     }
 
     @Override

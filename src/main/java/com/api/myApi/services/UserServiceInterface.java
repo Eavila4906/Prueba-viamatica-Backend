@@ -6,6 +6,7 @@ package com.api.myApi.services;
 
 import com.api.myApi.models.User;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -20,7 +21,7 @@ public interface UserServiceInterface {
 
     public User save(User user);
 
-    public User edit(Long id, User user);
+    public User edit(Long id, Map<String, String> user);
 
     public void delete(Long id);
     
